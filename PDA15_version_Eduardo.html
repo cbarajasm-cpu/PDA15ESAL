@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDA 15 - Gobiernos Post Revolucionarios y el Maximato</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, sans-serif;
+    background: #f0f4ff;
+    color: #1a1a1a;
+    padding: 1.5rem 1rem 4rem;
+  }
+  .page { max-width: 800px; margin: 0 auto; }
+
+  .caratula {
+    background: #2563eb;
+    color: white;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    border-radius: 14px;
+    margin-bottom: 1.2rem;
+  }
+  .badge {
+    background: #facc15; color: #1e3a8a;
+    font-size: 13px; font-weight: 700;
+    padding: 4px 16px; border-radius: 20px;
+    display: inline-block; margin-bottom: 12px;
+  }
+  .caratula h1 { font-size: 24px; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+  .caratula p { font-size: 13px; opacity: 0.85; }
+
+  .intro {
+    background: #eff6ff;
+    border-left: 4px solid #2563eb;
+    border-radius: 0 10px 10px 0;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #1e40af;
+    margin-bottom: 1.4rem;
+    line-height: 1.65;
+  }
+
+  .era-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: #6b7280; margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #dbeafe;
+  }
+
+  .tl-wrap { position: relative; padding-left: 100px; }
+  .tl-wrap::before {
+    content: '';
+    position: absolute; left: 80px; top: 0; bottom: 0;
+    width: 3px; background: #bfdbfe; border-radius: 3px;
+  }
+
+  .tl-item { position: relative; margin-bottom: 16px; }
+  .tl-year {
+    position: absolute; left: -88px; top: 12px;
+    font-size: 12px; font-weight: 700;
+    color: #2563eb; text-align: right; width: 68px;
+  }
+  .tl-dot {
+    position: absolute; left: -24px; top: 14px;
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 3px solid #f0f4ff; z-index: 2;
+    transition: transform 0.2s;
+  }
+  .tl-item:hover .tl-dot { transform: scale(1.3); }
+
+  .card {
+    background: white;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    transition: box-shadow 0.2s;
+  }
+  .card:hover { box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
+
+  .card-top {
+    display: flex; align-items: center;
+    padding: 12px 14px; gap: 12px;
+    cursor: pointer; user-select: none;
+  }
+  .emoji-box {
+    width: 42px; height: 42px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .card-info { flex: 1; min-width: 0; }
+  .card-name { font-size: 15px; font-weight: 700; color: #111827; margin-bottom: 2px; }
+  .card-period { font-size: 12px; color: #6b7280; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .max-tag {
+    font-size: 10px; font-weight: 700;
+    background: #fef9c3; color: #854d0e;
+    padding: 2px 8px; border-radius: 20px;
+    border: 1px solid #fde047;
+  }
+  .arrow { font-size: 16px; color: #9ca3af; transition: transform 0.25s; flex-shrink: 0; }
+
+  .card-body {
+    display: none;
+    border-top: 1px solid #f1f5f9;
+    padding: 12px 14px 14px;
+  }
+  .card-body.open { display: block; animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+
+  .card-body p { font-size: 13px; color: #4b5563; line-height: 1.7; margin-bottom: 10px; }
+  .card-body h4 { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #374151; margin-bottom: 7px; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .tag {
+    font-size: 12px; padding: 4px 10px;
+    border-radius: 20px;
+    background: #f8fafc; border: 1px solid #e2e8f0;
+    color: #4b5563;
+  }
+
+  .links { display: flex; flex-wrap: wrap; gap: 7px; }
+  .lnk {
+    font-size: 12px; padding: 5px 13px;
+    border-radius: 20px; text-decoration: none;
+    border: 1px solid #bfdbfe;
+    color: #1d4ed8; background: #eff6ff;
+    transition: background 0.15s;
+  }
+  .lnk:hover { background: #dbeafe; }
+
+  .max-box {
+    background: #1e3a8a;
+    border-radius: 14px;
+    padding: 1.4rem 1.5rem;
+    margin: 1.5rem 0;
+    color: white;
+  }
+  .max-box h3 { font-size: 18px; font-weight: 700; color: #facc15; margin-bottom: 8px; }
+  .max-box > p { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 14px; }
+  .max-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 10px; }
+  .max-item {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(250,204,21,0.3);
+    border-radius: 9px; padding: 10px 12px;
+  }
+  .max-item b { font-size: 11px; color: #facc15; display: block; margin-bottom: 4px; }
+  .max-item span { font-size: 12px; color: rgba(255,255,255,0.68); line-height: 1.5; }
+
+  .video-section {
+    background: white; border: 1.5px solid #e2e8f0;
+    border-radius: 12px; padding: 1.1rem 1.3rem;
+    margin: 1.2rem 0;
+  }
+  .video-section h3 { font-size: 15px; font-weight: 700; color: #111827; margin-bottom: 10px; }
+  .video-link {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; color: #1d4ed8;
+    text-decoration: none; padding: 7px 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .video-link:last-child { border-bottom: none; }
+  .video-link:hover { color: #1e40af; }
+  .yt-btn {
+    width: 28px; height: 28px; background: #ef4444;
+    border-radius: 6px; display: flex;
+    align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .yt-btn svg { fill: white; width: 12px; height: 12px; }
+
+  .fuentes {
+    background: white; border: 1.5px solid #e2e8f0;
+    border-radius: 12px; padding: 1.1rem 1.3rem;
+    margin-top: 1.2rem;
+  }
+  .fuentes h4 { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #9ca3af; margin-bottom: 8px; }
+  .fuentes a { display: block; font-size: 13px; color: #1d4ed8; margin-bottom: 5px; text-decoration: none; }
+  .fuentes a:hover { text-decoration: underline; }
+
+  .footer { text-align: center; margin-top: 2rem; font-size: 11px; color: #9ca3af; }
+
+  @media (max-width: 500px) {
+    .tl-wrap { padding-left: 70px; }
+    .tl-wrap::before { left: 52px; }
+    .tl-year { left: -62px; width: 46px; font-size: 10px; }
+    .tl-dot { left: -16px; }
+    .caratula h1 { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="caratula">
+    <div class="badge">PDA 15</div>
+    <h1>Gobiernos Post Revolucionarios<br>y el Maximato</h1>
+    <p>Linea del tiempo interactiva &nbsp;·&nbsp; Historia de Mexico &nbsp;·&nbsp; 1920 - 1940</p>
+  </div>
+
+  <div class="intro">
+    Despues de la Revolucion Mexicana (1910-1920), Mexico tuvo varios presidentes que buscaron estabilizar el pais. En este periodo tambien ocurrio el <strong>Maximato</strong>, donde Plutarco Elias Calles controlaba todo aunque ya no era presidente. Haz clic en cada presidente para ver mas informacion.
+  </div>
+
+  <div class="era-label">Linea del tiempo · 1920 - 1940</div>
+
+  <div class="tl-wrap" id="tl"></div>
+
+  <div class="max-box">
+    <h3>&#9733; El Maximato (1928 - 1936)</h3>
+    <p>Fue cuando Plutarco Elias Calles, el "Jefe Maximo", controlaba a los presidentes desde atras sin ser presidente. Duro hasta que Lazaro Cardenas lo mando al exilio en 1936 y Mexico pudo gobernar solo.</p>
+    <div class="max-grid">
+      <div class="max-item"><b>Por que "Maximato"?</b><span>Por su titulo de "Jefe Maximo de la Revolucion Mexicana"</span></div>
+      <div class="max-item"><b>Quienes gobernaron?</b><span>Portes Gil, Ortiz Rubio y Abelardo Rodriguez</span></div>
+      <div class="max-item"><b>Que creo Calles?</b><span>El PNR en 1929, que despues se convirtio en el PRI</span></div>
+      <div class="max-item"><b>Como termino?</b><span>Cardenas expulso a Calles del pais en 1936 mandolo a EUA</span></div>
+    </div>
+  </div>
+
+  <div class="video-section">
+    <h3>&#9654; Videos para aprender mas</h3>
+    <a class="video-link" href="https://www.youtube.com/results?search_query=maximato+mexico+historia+documental" target="_blank">
+      <div class="yt-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      El Maximato - Historia de Mexico
+    </a>
+    <a class="video-link" href="https://www.youtube.com/results?search_query=Lazaro+Cardenas+expropiacion+petrolera+1938" target="_blank">
+      <div class="yt-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      Expropiacion Petrolera 1938 - Lazaro Cardenas
+    </a>
+    <a class="video-link" href="https://www.youtube.com/results?search_query=gobiernos+posrevolucionarios+mexico+resumen" target="_blank">
+      <div class="yt-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      Gobiernos Post Revolucionarios - Resumen
+    </a>
+    <a class="video-link" href="https://www.youtube.com/results?search_query=guerra+cristera+mexico+historia" target="_blank">
+      <div class="yt-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      La Guerra Cristera - Calles vs la Iglesia
+    </a>
+  </div>
+
+  <div class="fuentes">
+    <h4>Fuentes consultadas</h4>
+    <a href="https://es.wikipedia.org/wiki/Maximato" target="_blank">&#128279; Wikipedia - El Maximato</a>
+    <a href="https://www.inehrm.gob.mx" target="_blank">&#128279; INEHRM - Instituto Nacional de Estudios Historicos</a>
+    <a href="https://es.wikipedia.org/wiki/Plutarco_El%C3%ADas_Calles" target="_blank">&#128279; Wikipedia - Plutarco Elias Calles</a>
+    <a href="https://es.wikipedia.org/wiki/L%C3%A1zaro_C%C3%A1rdenas" target="_blank">&#128279; Wikipedia - Lazaro Cardenas</a>
+    <a href="https://www.memoriapoliticademexico.org" target="_blank">&#128279; Memoria Politica de Mexico</a>
+  </div>
+
+  <div class="footer">PDA 15 &nbsp;·&nbsp; Actividad 2 &nbsp;·&nbsp; Gobiernos Post Revolucionarios y el Maximato &nbsp;·&nbsp; Historia de Mexico</div>
+
+</div>
+
+<script>
+const data = [
+  {
+    year: "1920", name: "Alvaro Obregon", period: "1920 - 1924",
+    emoji: "&#11088;", color: "#16a34a", bg: "#dcfce7",
+    desc: "Fue el primer presidente despues de la Revolucion Mexicana. Promovio mucho la educacion con Jose Vasconcelos y apoyo a pintores famosos como Diego Rivera y Orozco. Firmo los Tratados de Bucareli con Estados Unidos para tener buenas relaciones.",
+    logros: ["Reforma educativa con Vasconcelos", "Apoyo al muralismo mexicano", "Tratados de Bucareli con EUA (1923)", "Reparto de tierras agrarias", "Pacificacion del pais"],
+    wiki: "https://es.wikipedia.org/wiki/%C3%81lvaro_Obreg%C3%B3n",
+    yt: "https://www.youtube.com/results?search_query=Alvaro+Obregon+presidente+Mexico+historia",
+    max: false
+  },
+  {
+    year: "1924", name: "Plutarco Elias Calles", period: "1924 - 1928",
+    emoji: "&#128081;", color: "#dc2626", bg: "#fee2e2",
+    desc: "El presidente mas poderoso de esa epoca. Tuvo un conflicto muy fuerte con la Iglesia Catolica que se llamo Guerra Cristera (1926-1929). En 1929 fundo el PNR que despues se convirtio en el PRI. Despues de ser presidente siguio controlando todo desde atras.",
+    logros: ["Fundo el PNR en 1929 (futuro PRI)", "Banco de Mexico (1925)", "Guerra Cristera (1926-1929)", "Ley Calles contra la Iglesia", "Modernizacion del ejercito"],
+    wiki: "https://es.wikipedia.org/wiki/Plutarco_El%C3%ADas_Calles",
+    yt: "https://www.youtube.com/results?search_query=Plutarco+Elias+Calles+maximato+historia",
+    max: false
+  },
+  {
+    year: "1928", name: "Emilio Portes Gil", period: "1928 - 1930",
+    emoji: "1&#65039;&#8419;", color: "#d97706", bg: "#fef3c7",
+    desc: "Primer presidente del Maximato. Llego al poder cuando asesinaron a Obregon. Goberné bajo las ordenes de Calles. Logro terminar la Guerra Cristera y le dio autonomia a la UNAM para que se gobernara sola.",
+    logros: ["Termino la Guerra Cristera (1929)", "Autonomia universitaria de la UNAM", "Primer presidente del Maximato", "Fundacion del PNR con Calles"],
+    wiki: "https://es.wikipedia.org/wiki/Emilio_Portes_Gil",
+    yt: "https://www.youtube.com/results?search_query=Emilio+Portes+Gil+presidente+Mexico",
+    max: true
+  },
+  {
+    year: "1930", name: "Pascual Ortiz Rubio", period: "1930 - 1932",
+    emoji: "2&#65039;&#8419;", color: "#d97706", bg: "#fef3c7",
+    desc: "Segundo presidente del Maximato. Le dispararon el mismo dia que tomo posesion y quedo herido. Tuvo muchos problemas con Calles y al final tuvo que renunciar en 1932. Es el unico presidente de Mexico que ha renunciado al cargo.",
+    logros: ["Unico presidente que renuncio", "Resistio la crisis economica de 1929", "Obras publicas de carreteras", "Goberno bajo presion de Calles"],
+    wiki: "https://es.wikipedia.org/wiki/Pascual_Ortiz_Rubio",
+    yt: "https://www.youtube.com/results?search_query=Pascual+Ortiz+Rubio+presidente+Mexico",
+    max: true
+  },
+  {
+    year: "1932", name: "Abelardo L. Rodriguez", period: "1932 - 1934",
+    emoji: "3&#65039;&#8419;", color: "#d97706", bg: "#fef3c7",
+    desc: "Tercer y ultimo presidente del Maximato. Fue empresario y politico. Creo el salario minimo en Mexico para proteger a los trabajadores y preparo todo para que llegara Lazaro Cardenas al poder.",
+    logros: ["Salario minimo en Mexico", "Codigo Civil Federal", "Secretaria de Economia Nacional", "Ultimo presidente del Maximato"],
+    wiki: "https://es.wikipedia.org/wiki/Abelardo_L._Rodr%C3%ADguez",
+    yt: "https://www.youtube.com/results?search_query=Abelardo+Rodriguez+presidente+Mexico",
+    max: true
+  },
+  {
+    year: "1934", name: "Lazaro Cardenas", period: "1934 - 1940",
+    emoji: "&#127775;", color: "#1d4ed8", bg: "#dbeafe",
+    desc: "El presidente mas importante de esta epoca. En 1936 expulso a Calles del pais y termino el Maximato. El 18 de marzo de 1938 nacionalizo el petroleo mexicano, uno de los momentos mas importantes de la historia de Mexico. Tambien repartio millones de hectareas de tierra a los campesinos.",
+    logros: ["Expropiacion Petrolera (18 marzo 1938)", "Expulso a Calles del pais (1936)", "Reparto agrario - 18 millones de hectareas", "Creo el PRM (futuro PRI)", "Apoyo a refugiados de la Guerra Civil Espanola"],
+    wiki: "https://es.wikipedia.org/wiki/L%C3%A1zaro_C%C3%A1rdenas",
+    yt: "https://www.youtube.com/results?search_query=Lazaro+Cardenas+expropiacion+petrolera+1938",
+    max: false
+  }
+];
+
+const tl = document.getElementById('tl');
+
+data.forEach(function(g, i) {
+  var item = document.createElement('div');
+  item.className = 'tl-item';
+  var logrosHtml = g.logros.map(function(l){ return '<span class="tag">&#10003; ' + l + '</span>'; }).join('');
+  item.innerHTML =
+    '<div class="tl-year">' + g.year + '</div>' +
+    '<div class="tl-dot" style="background:' + g.color + ';"></div>' +
+    '<div class="card">' +
+      '<div class="card-top" onclick="toggle(' + i + ')">' +
+        '<div class="emoji-box" style="background:' + g.bg + ';">' + g.emoji + '</div>' +
+        '<div class="card-info">' +
+          '<div class="card-name">' + g.name + '</div>' +
+          '<div class="card-period">' + g.period + (g.max ? ' <span class="max-tag">&#10022; Maximato</span>' : '') + '</div>' +
+        '</div>' +
+        '<div class="arrow" id="arr' + i + '">&#9660;</div>' +
+      '</div>' +
+      '<div class="card-body" id="bod' + i + '">' +
+        '<p>' + g.desc + '</p>' +
+        '<h4>Logros y datos importantes</h4>' +
+        '<div class="tags">' + logrosHtml + '</div>' +
+        '<h4>Links para investigar mas</h4>' +
+        '<div class="links">' +
+          '<a class="lnk" href="' + g.wiki + '" target="_blank">&#127760; Wikipedia</a>' +
+          '<a class="lnk" href="' + g.yt + '" target="_blank">&#9654; YouTube</a>' +
+          '<a class="lnk" href="https://www.inehrm.gob.mx" target="_blank">&#128218; INEHRM</a>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  tl.appendChild(item);
+});
+
+function toggle(i) {
+  var bod = document.getElementById('bod' + i);
+  var arr = document.getElementById('arr' + i);
+  var open = bod.classList.contains('open');
+  document.querySelectorAll('.card-body').forEach(function(b){ b.classList.remove('open'); });
+  document.querySelectorAll('.arrow').forEach(function(a){ a.style.transform = ''; });
+  if (!open) {
+    bod.classList.add('open');
+    arr.style.transform = 'rotate(180deg)';
+  }
+}
+</script>
+</body>
+</html>
